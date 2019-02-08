@@ -1,6 +1,6 @@
 package com.devserbyn.twatch.configuration;
 
-import com.devserbyn.twatch.controller.bot.BaseBot;
+import com.devserbyn.twatch.controller.bot.MainBot;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -13,13 +13,13 @@ import java.util.List;
 public class BotRegisterConfig {
 
     @Bean
-    BotsApiContext apiConfig() {
+    BotsApiContext apiConfig(MainBot bot1) {
         BotsApiContext configBO = new BotsApiContext();
 
         configBO.setBotsApi(new TelegramBotsApi());
 
         List<TelegramLongPollingBot> bots = new ArrayList<>();
-        bots.add(new BaseBot());
+        bots.add(bot1);
         configBO.setLongPollingBots(bots);
 
         return configBO;
