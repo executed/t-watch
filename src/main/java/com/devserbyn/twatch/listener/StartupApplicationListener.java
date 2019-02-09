@@ -3,24 +3,17 @@ package com.devserbyn.twatch.listener;
 import com.devserbyn.twatch.service.BotRegisterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.event.ApplicationContextInitializedEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextStartedEvent;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.ApiContextInitializer;
 
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class StartupApplicationListener implements ApplicationListener<ApplicationContextInitializedEvent> {
-
-    private final BotRegisterService botRegisterService;
-
+public class StartupApplicationListener implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
-    public void onApplicationEvent(ApplicationContextInitializedEvent applicationContextInitializedEvent) {
-        log.info("Application started");
-        ApiContextInitializer.init();
-        botRegisterService.registerBots();
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        //
     }
 }

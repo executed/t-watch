@@ -2,5 +2,7 @@ package com.devserbyn.twatch.service;
 
 public interface BotRegisterService {
 
-    void registerBots();
+    String getToken(String className);
+
+    String getUsername(String className);
 }
