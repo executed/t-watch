@@ -1,0 +1,52 @@
+package com.devserbyn.twatch.utility.annotation;
+
+import com.devserbyn.twatch.annotation.Profiled;
+import com.devserbyn.twatch.controller.managment.ProfilingController;
+import com.devserbyn.twatch.utility.PropertyUtil;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import javax.management.*;
+import java.lang.management.ManagementFactory;
+import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
+
+@Component
+@Slf4j
+@RequiredArgsConstructor
+public class ProfiledAnnotationUtil {
+
+    private final PropertyUtil propertyUtil;
+
+    public void registerMBean(ProfilingController controller) throws Exception {
+        MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
+        mBeanServer.registerMBean(controller, propertyUtil.getJmxObjectName(Profiled.class));
+    }
+
+    public Object profileMethod(Object bean, Method method, Object[] args) {
+        Object returnValue = null;
+        try {
+            String methodFullName = String.format("%s.%s()", bean.getClass().getSimpleName(),
+                                                             method.getName());
+            log.info("Profiling of method {} started", methodFullName);
+
+            returnValue = profileMethodExecutionTime(bean, method, args);
+            // Here can be another profiling methods
+
+            log.info("Profiling of method {} ended", methodFullName);
+        } catch (Exception e) {
+            log.error("Something went wrong while profiling", e);
+        }
+        return returnValue;
+    }
+
+    private Object profileMethodExecutionTime(Object bean, Method method, Object[] args) throws Exception {
+        long beforeTime = System.currentTimeMillis();
+        Object returnValue = method.invoke(bean, args);
+        long afterTime = (System.currentTimeMillis() - beforeTime);
+        double executionTime = TimeUnit.NANOSECONDS.toSeconds(afterTime);
+        log.info("Method executionTime: {} seconds", executionTime);
+        return returnValue;
+    }
+}

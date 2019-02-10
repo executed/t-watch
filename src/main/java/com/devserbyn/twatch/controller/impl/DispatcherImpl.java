@@ -1,5 +1,6 @@
 package com.devserbyn.twatch.controller.impl;
 
+import com.devserbyn.twatch.annotation.Profiled;
 import com.devserbyn.twatch.controller.Dispatcher;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -9,6 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import java.util.Optional;
 
 @Component
+@Profiled
 public class DispatcherImpl implements Dispatcher {
 
     @Override
