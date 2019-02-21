@@ -24,7 +24,7 @@ public class BotAnswerServiceImpl implements BotAnswersService {
         if (answersString == null) {
             return "default answer";
         }
-        String[] answers = answersString.split("|");
+        String[] answers = answersString.split("--");
         return answers[new Random().nextInt(answers.length)];
     }
 }
