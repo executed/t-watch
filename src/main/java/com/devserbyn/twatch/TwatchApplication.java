@@ -1,4 +1,4 @@
-package com.devserbyn.twatch.executor;
+package com.devserbyn.twatch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,7 +8,6 @@ import org.telegram.telegrambots.ApiContextInitializer;
 
 @SpringBootApplication
 @EnableScheduling
-@ComponentScan ("com.devserbyn.twatch")
 public class TwatchApplication {
 
     static {
