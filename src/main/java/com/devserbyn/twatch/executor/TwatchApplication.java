@@ -11,10 +11,12 @@ import org.telegram.telegrambots.ApiContextInitializer;
 @ComponentScan ("com.devserbyn.twatch")
 public class TwatchApplication {
 
-    public static void main(String[] args) {
+    static {
         ApiContextInitializer.init();
-        SpringApplication.run(TwatchApplication.class, args);
     }
 
+    public static void main(String[] args) {
+        SpringApplication.run(TwatchApplication.class, args);
+    }
 }
 
