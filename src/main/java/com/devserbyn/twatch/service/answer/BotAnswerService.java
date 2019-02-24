@@ -5,4 +5,6 @@ import com.devserbyn.twatch.model.bot.BaseBot;
 public interface BotAnswerService {
 
     String lookForAnswer(String message, Class<? extends BaseBot> botClass);
+
+    void learnNewAnswer(String answer, Class<? extends BaseBot> botClass);
 }

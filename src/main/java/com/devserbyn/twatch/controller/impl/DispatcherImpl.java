@@ -20,9 +20,14 @@ public class DispatcherImpl implements Dispatcher {
     @Override
     public Optional<BotApiMethod> handleUpdate(Update update) {
         //to be continued...
+        String incomeMessage = update.getMessage().getText();
+
         SendMessage msg = new SendMessage();
 
-        String answer = service.lookForAnswer(update.getMessage().getText(), MainBot.class);
+        if (incomeMessage.contains("dict")) {
+            service.learnNewAnswer(incomeMessage, MainBot.class);
+        }
+        String answer = service.lookForAnswer(incomeMessage, MainBot.class);
         msg.setText(answer);
         msg.setChatId(update.getMessage().getChatId());
 

@@ -29,4 +29,17 @@ public class BotAnswerServiceImpl implements BotAnswerService{
             return STR_CONST.BOT_ANSWER_ERROR;
         }
     }
+
+    @Override
+    public void learnNewAnswer(String message, Class<? extends BaseBot> botClass) {
+        String fileWithAnswersPath = STR_CONST.BOT_ANSWER_FILES_PREFIX
+                                    + botClass.getSimpleName().toLowerCase()
+                                    + BOT_ANSWER_FILES_POSTFIX;
+        String answerLine = message.substring(message.indexOf(":") + 2);
+        try {
+            BotAnswerUtil.addNewBotAnswer(fileWithAnswersPath, answerLine);
+        } catch (IOException e) {
+            log.error("Something wrong while learning new bot answer", e);
+        }
+    }
 }
