@@ -18,7 +18,8 @@ public class BotAnswerServiceImpl implements BotAnswerService{
 
     @Override
     public String lookForAnswer(String message, Class<? extends BaseBot> botClass) {
-        String fileWithAnswersPath = botClass.getSimpleName().toLowerCase()
+        String fileWithAnswersPath = STR_CONST.BOT_ANSWER_FILES_PREFIX
+                                     + botClass.getSimpleName().toLowerCase()
                                      + BOT_ANSWER_FILES_POSTFIX;
         String key = message.toUpperCase();
         try {
