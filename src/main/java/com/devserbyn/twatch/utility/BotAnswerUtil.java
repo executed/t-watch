@@ -19,6 +19,7 @@ public class BotAnswerUtil {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if (!line.contains("=")) continue;
                 String foundKey = line.substring(0, (line.indexOf("=") - 1));
                 if (foundKey.equals(key)) {
                     foundLines.add(line);
