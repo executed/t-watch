@@ -22,7 +22,7 @@ public class DeploymentServiceImpl implements DeploymentService {
 
     /** Requests for page of current app to forbid deployment server snoozing process */
     @Override
-    //@Scheduled(cron = "${deployment.activityStatusMessage.cronExp}")
+    @Scheduled(cron = "${deployment.activityStatusMessage.cronExp}")
     public void postponeSnoozeOnServer() throws IOException {
         System.out.println("Start postpone snoozing prevent");
         String contextPath = env.getProperty("deployment.contextPath");

@@ -20,7 +20,7 @@ public class MainBotAdminServiceImpl implements AdminService {
     public void sendMessageToAdmin() {
         SendMessage message = new SendMessage();
         message.setChatId(523876506L);
-        message.setText("" + (minutesOfRuntime + 30));
+        message.setText("" + (minutesOfRuntime + 60));
         bot.sendResponse(message);
     }
 }
