@@ -1,6 +1,5 @@
 package com.devserbyn.twatch.utility;
 
-import com.devserbyn.twatch.constant.PROPERTY_CONST;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
