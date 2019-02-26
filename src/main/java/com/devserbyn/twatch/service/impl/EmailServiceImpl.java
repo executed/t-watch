@@ -1,5 +1,6 @@
 package com.devserbyn.twatch.service.impl;
 
+import com.devserbyn.twatch.constant.MAIL_CONST;
 import com.devserbyn.twatch.model.EmailMessage;
 import com.devserbyn.twatch.service.EmailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,6 +20,9 @@ import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
+
+import static com.devserbyn.twatch.constant.MAIL_CONST.EMAIL_CONTENT_ID;
+import static com.devserbyn.twatch.constant.MAIL_CONST.EMAIL_MAIN_TITLE_ID;
 
 @Component
 @PropertySource ("classpath:mail.properties")
@@ -68,8 +72,8 @@ public class EmailServiceImpl implements EmailService {
         try {
             File templateFile = mailTemplateResource.getFile();
             result = FileUtils.readFileToString(templateFile, "UTF-8");
-            //result = result.replace(EMAIL_MAIN_TITLE_ID, email.getTitle())
-            //             .replace(EMAIL_CONTENT_ID, email.getContent());
+            result = result.replace(EMAIL_MAIN_TITLE_ID, email.getTitle())
+                           .replace(EMAIL_CONTENT_ID, email.getContent());
         } catch (IOException e) {
             log.debug("Something wrong while wrapping email in template", e);
         }
