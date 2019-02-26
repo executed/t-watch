@@ -22,7 +22,7 @@ public class EmailSenderScheduledServiceImpl implements EmailSenderScheduledServ
     private final EmailService emailService;
 
     @Override
-    @Scheduled(fixedRate = 100000)
+    @Scheduled(fixedRate = 60_000)
     public void sendDictionaryFile() {
         log.info("Sending email with dictionary data...");
         File attachment = emailUtil.getDictionaryAttachment().orElseThrow(RuntimeException::new);
