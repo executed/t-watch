@@ -1,4 +1,4 @@
-package com.devserbyn.twatch.service.scheduled;
+package com.devserbyn.twatch.service;
 
 public interface EmailSenderScheduledService {
 

@@ -1,6 +1,7 @@
-package com.devserbyn.twatch.service.scheduled;
+package com.devserbyn.twatch.service.impl;
 
 import com.devserbyn.twatch.model.EmailMessage;
+import com.devserbyn.twatch.service.EmailSenderScheduledService;
 import com.devserbyn.twatch.service.EmailService;
 import com.devserbyn.twatch.utility.EmailUtil;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.Date;
 @Slf4j
 @RequiredArgsConstructor
 @PropertySource ("classpath:deployment.properties")
-public class EmailSenderScheduledServiceImpl implements EmailSenderScheduledService{
+public class EmailSenderScheduledServiceImpl implements EmailSenderScheduledService {
 
     private final EmailUtil emailUtil;
     private final EmailService emailService;
