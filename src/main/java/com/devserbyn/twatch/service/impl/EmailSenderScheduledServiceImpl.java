@@ -7,6 +7,7 @@ import com.devserbyn.twatch.utility.EmailUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.Date;
 
 @Service
 @Slf4j
+@EnableScheduling
 @RequiredArgsConstructor
 @PropertySource ("classpath:deployment.properties")
 public class EmailSenderScheduledServiceImpl implements EmailSenderScheduledService {
