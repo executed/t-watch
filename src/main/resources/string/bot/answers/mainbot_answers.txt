@@ -8,3 +8,9 @@ YO = Hello!
 HI = Hello!
 HI = Yo!
 HI = Wassup?
+
+FUCK = Stay positive)
+SHIT = Everything is gonna be alright)
+LOL = Yep, funny)
+NICE = Glad to hear this
+AWESOME = Cool!
