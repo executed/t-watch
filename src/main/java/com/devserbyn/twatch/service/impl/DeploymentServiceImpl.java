@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,10 @@ import static java.util.Objects.requireNonNull;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-@PropertySource("classpath:deployment.properties")
+@PropertySources({
+        @PropertySource("classpath:deployment.properties"),
+        @PropertySource("classpath:mail.properties")
+})
 public class DeploymentServiceImpl implements DeploymentService {
 
     private final Environment env;
@@ -58,7 +62,8 @@ public class DeploymentServiceImpl implements DeploymentService {
         EmailMessage message = EmailMessage.builder().attachment(attachment)
                 .title("Dictionary file")
                 .content("Generated " + new Date())
-                .target("twatch.bot.report@gmail.com").build();
+                .target(env.getProperty("email.report"))
+                .build();
         emailService.sendEmail(message);
     }
 }
