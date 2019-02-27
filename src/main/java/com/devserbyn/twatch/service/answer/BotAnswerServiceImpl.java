@@ -1,6 +1,7 @@
 package com.devserbyn.twatch.service.answer;
 
 import com.devserbyn.twatch.constant.STR_CONST;
+import com.devserbyn.twatch.model.bo.BotAnswerBO;
 import com.devserbyn.twatch.model.bot.BaseBot;
 import com.devserbyn.twatch.utility.BotAnswerUtil;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,8 @@ import static com.devserbyn.twatch.constant.STR_CONST.BOT_ANSWER_FILES_POSTFIX;
 @Service
 @Slf4j
 public class BotAnswerServiceImpl implements BotAnswerService{
+
+    private BotAnswerBO botAnswerBO;
 
     @Override
     public String lookForAnswer(String message, Class<? extends BaseBot> botClass) {
@@ -38,6 +41,7 @@ public class BotAnswerServiceImpl implements BotAnswerService{
         String answerLine = message.substring(message.indexOf(":") + 2);
         try {
             BotAnswerUtil.addNewBotAnswer(fileWithAnswersPath, answerLine);
+            botAnswerBO.setDictionaryModified(true);
         } catch (IOException e) {
             log.error("Something wrong while learning new bot answer", e);
         }
