@@ -17,7 +17,7 @@ import static com.devserbyn.twatch.constant.STR_CONST.BOT_ANSWER_FILES_POSTFIX;
 @Slf4j
 public class BotAnswerServiceImpl implements BotAnswerService{
 
-    private BotAnswerBO botAnswerBO;
+    private final BotAnswerBO botAnswerBO;
 
     @Override
     public String lookForAnswer(String message, Class<? extends BaseBot> botClass) {
