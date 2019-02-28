@@ -32,7 +32,7 @@ public class DictionaryFileScheduleServiceImpl {
     private final EmailService emailService;
     private final BotAnswerBO botAnswerBO;
 
-    @Scheduled (cron = PROPERTY_CONST.DEPLOYMENT_SEND_DICT_FILE_CRON_EXP)
+    @Scheduled (cron = "${deployment.sendDictionaryFile.cronExp}")
     public void sendDictionaryFile() {
         if (!botAnswerBO.isDictionaryModified()) {
             return;
