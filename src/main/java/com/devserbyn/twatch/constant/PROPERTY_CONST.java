@@ -8,4 +8,10 @@ public final class PROPERTY_CONST {
     public static final String JMX_ANNOTATION_DOMAIN = "jmx.annotation.domain";
     public static final String JMX_ANNOTATION_KEY = "jmx.annotation.%s.key";
     public static final String JMX_ANNOTATION_VALUE = "jmx.annotation.%s.value";
+
+    public static final String DEPLOYMENT_PREV_SCHED_CRON_EXP = "${deployment.preventScheduling.cronExp}";
+    public static final String DEPLOYMENT_ACTIV_STAT_MSG_CRON_EXP = "${deployment.activityStatusMessage.cronExp}";
+    public static final String DEPLOYMENT_SEND_DICT_FILE_CRON_EXP = "${deployment.sendDictionaryFile.cronExp}";
+    public static final String DEPLOYMENT_CONTEXT_PATH = "deployment.contextPath";
+    public static final String DEPLOYMENT_PREV_SCHED_LOAD_TIMEOUT = "deployment.preventScheduling.pageLoadTimeout";
 }

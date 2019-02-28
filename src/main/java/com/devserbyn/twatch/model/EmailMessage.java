@@ -19,12 +19,15 @@ public class EmailMessage {
 
     private File attachment;
 
+    private String comment;
+
     @Override
     public String toString() {
         return "EmailMessage{" +
                 "target='" + target + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
+                ", comment='" + comment + '\'' +
                 ((attachment != null) ? ", attachment='true'" : "") +
                 '}';
     }

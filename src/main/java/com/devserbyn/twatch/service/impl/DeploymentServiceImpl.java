@@ -5,7 +5,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -15,12 +18,15 @@ import static java.util.Objects.requireNonNull;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@PropertySources ({
+        @PropertySource ("classpath:deployment.properties")
+})
 public class DeploymentServiceImpl implements DeploymentService {
 
     private final Environment env;
 
     /** Requests for page of current app to forbid deployment server snoozing process */
-    @Override
+    @Scheduled (cron = "${deployment.preventScheduling.cronExp}")
     public void postponeSnoozeOnServer() throws IOException {
         System.out.println("Start postpone snoozing prevent");
         String contextPath = env.getProperty("deployment.contextPath");
