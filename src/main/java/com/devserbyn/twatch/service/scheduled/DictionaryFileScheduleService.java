@@ -1,16 +1,14 @@
-package com.devserbyn.twatch.service;
+package com.devserbyn.twatch.service.scheduled;
 
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import java.io.IOException;
-
 @PropertySources ({
         @PropertySource ("classpath:deployment.properties")
 })
-public interface DeploymentService {
+public interface DictionaryFileScheduleService {
 
-    @Scheduled (cron = "${deployment.preventScheduling.cronExp}")
-    void postponeSnoozeOnServer() throws IOException;
+    @Scheduled(cron = "${deployment.sendDictionaryFile.cronExp}")
+    void sendDictionaryFile();
 }
