@@ -45,5 +45,6 @@ public class DictionaryFileScheduleServiceImpl {
                 .comment(MAIL_CONST.DICT_FILE_COMMENT)
                 .build();
         emailService.sendEmail(message);
+        botAnswerBO.setDictionaryModified(false);
     }
 }
