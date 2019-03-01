@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.Optional;
@@ -20,17 +21,21 @@ public class DispatcherImpl implements Dispatcher {
     @Override
     public Optional<BotApiMethod> handleUpdate(Update update) {
         //to be continued...
-        String incomeMessage = update.getMessage().getText();
-
-        SendMessage msg = new SendMessage();
-
-        if (incomeMessage.contains("dict")) {
-            service.learnNewAnswer(incomeMessage, MainBot.class);
+        Message msg = update.getMessage();
+        if (msg == null) {
+            return Optional.empty();
         }
-        String answer = service.lookForAnswer(incomeMessage, MainBot.class);
-        msg.setText(answer);
-        msg.setChatId(update.getMessage().getChatId());
+        String msgText = msg.getText();
 
-        return Optional.of(msg);
+        SendMessage sendMsg = new SendMessage();
+
+        if (msgText.contains("dict")) {
+            service.learnNewAnswer(msgText, MainBot.class);
+        }
+        String answer = service.lookForAnswer(msgText, MainBot.class);
+        sendMsg.setText(answer);
+        sendMsg.setChatId(update.getMessage().getChatId());
+
+        return Optional.of(sendMsg);
     }
 }
