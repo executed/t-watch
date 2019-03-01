@@ -35,7 +35,6 @@ public class DeploymentServiceImpl implements DeploymentService {
         }
         System.out.println("Start postpone snoozing prevent");
         String contextPath = env.getProperty("deployment.contextPath");
-        log.warn("CONTEXT: " + contextPath);
         String pageLoadTimeoutStr = env.getProperty("deployment.preventScheduling.pageLoadTimeout");
         Document doc = Jsoup.connect(contextPath)
                             .timeout(Integer.valueOf(requireNonNull(pageLoadTimeoutStr)))

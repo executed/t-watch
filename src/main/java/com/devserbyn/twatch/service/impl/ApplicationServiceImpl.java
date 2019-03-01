@@ -23,9 +23,9 @@ public class ApplicationServiceImpl implements ApplicationService {
 
         if (argumentList.contains(ARGS_CONST.DEV_MODE)){
             applicationBO.setDevelopmentMode(true);
-            log.warn("Application running in development mode");
+            log.info("Application running in development mode");
         } else {
-            log.warn("Application running in production mode");
+            log.info("Application running in production mode");
         }
     }
 }
