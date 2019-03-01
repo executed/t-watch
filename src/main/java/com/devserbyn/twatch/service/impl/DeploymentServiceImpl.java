@@ -33,16 +33,14 @@ public class DeploymentServiceImpl implements DeploymentService {
         if (applicationBO.isDevelopmentMode()) {
             return;
         }
-        System.out.println("Start postpone snoozing prevent");
+        log.trace("Snoozing prevention job started");
         String contextPath = env.getProperty("deployment.contextPath");
         String pageLoadTimeoutStr = env.getProperty("deployment.preventScheduling.pageLoadTimeout");
         Document doc = Jsoup.connect(contextPath)
                             .timeout(Integer.valueOf(requireNonNull(pageLoadTimeoutStr)))
                             .get();
-        if (doc == null) {
-            System.out.println("Failed: app was already snoozed.");
-        } else {
-            System.out.println("OK: snoozing of app prevented");
+        if (doc != null) {
+            log.trace("Snoozing prevention job succeeded");
         }
     }
 }

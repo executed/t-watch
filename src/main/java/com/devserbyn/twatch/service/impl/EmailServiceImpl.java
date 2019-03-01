@@ -62,7 +62,7 @@ public class EmailServiceImpl implements EmailService {
 
             mailSender.send(messageInstance);
         } catch (MessagingException e){
-            log.debug("Something went wrong while sending email", e);
+            log.error("Something went wrong while sending email", e);
         }
         log.trace("Email sent - {}", email);
     }

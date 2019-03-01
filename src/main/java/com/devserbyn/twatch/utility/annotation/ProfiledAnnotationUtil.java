@@ -29,12 +29,12 @@ public class ProfiledAnnotationUtil {
         try {
             String methodFullName = String.format("%s.%s()", bean.getClass().getSimpleName(),
                                                              method.getName());
-            log.info("Profiling of method {} started", methodFullName);
+            log.debug("Profiling of method {} started", methodFullName);
 
             returnValue = profileMethodExecutionTime(bean, method, args);
             // Here can be another profiling methods
 
-            log.info("Profiling of method {} ended", methodFullName);
+            log.debug("Profiling of method {} succeeded", methodFullName);
         } catch (Exception e) {
             log.error("Something went wrong while profiling", e);
         }
@@ -46,7 +46,7 @@ public class ProfiledAnnotationUtil {
         Object returnValue = method.invoke(bean, args);
         long afterTime = (System.currentTimeMillis() - beforeTime);
         double executionTime = TimeUnit.NANOSECONDS.toSeconds(afterTime);
-        log.info("Method executionTime: {} seconds", executionTime);
+        log.debug("Method executionTime: {} seconds", executionTime);
         return returnValue;
     }
 }
