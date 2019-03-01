@@ -37,7 +37,6 @@ public class DictionaryFileScheduleServiceImpl {
         if (!botAnswerBO.isDictionaryModified()) {
             return;
         }
-        log.info("Sending email with dictionary data...");
         File attachment = emailUtil.getDictionaryAttachment().orElseThrow(RuntimeException::new);
         EmailMessage message = EmailMessage.builder().attachment(attachment)
                 .title(MAIL_CONST.DICT_FILE_TITLE)

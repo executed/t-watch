@@ -64,7 +64,7 @@ public class EmailServiceImpl implements EmailService {
         } catch (MessagingException e){
             log.error("Something went wrong while sending email", e);
         }
-        log.trace("Email sent - {}", email);
+        log.debug("Email sent - {}", email);
     }
 
     private Optional<String> wrapInTemplate(EmailMessage email) {
