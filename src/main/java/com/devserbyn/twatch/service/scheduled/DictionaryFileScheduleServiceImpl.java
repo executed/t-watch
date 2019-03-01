@@ -15,8 +15,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.util.Date;
+import java.io.*;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -46,5 +46,30 @@ public class DictionaryFileScheduleServiceImpl {
                 .build();
         emailService.sendEmail(message);
         botAnswerBO.setDictionaryModified(false);
+    }
+
+    @Scheduled (cron = "${deployment.sortDictionaryFile.cronExp}")
+    public void sortDictionaryFileAnswers() throws IOException {
+        log.info("Sorting of dictionary files started");
+        File file = emailUtil.getDictionaryAttachment().orElseThrow(RuntimeException::new);
+        Set<String> resultSet = new TreeSet<>();
+        // Reading all lines into sorted set
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            while (reader.ready()) {
+                resultSet.add(reader.readLine());
+            }
+        }
+        // Writing lines back into file
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            resultSet.forEach(line -> {
+                try {
+                    writer.newLine();
+                    writer.write(line);
+                } catch (IOException e) {
+                    log.error("Something went wrong while writing sorted answers back in file", e);
+                }
+            });
+        }
+        log.info("Sorting of dictionary files succeeded");
     }
 }
