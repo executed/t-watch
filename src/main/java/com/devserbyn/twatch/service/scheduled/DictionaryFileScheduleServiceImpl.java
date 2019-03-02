@@ -49,7 +49,7 @@ public class DictionaryFileScheduleServiceImpl {
     }
 
     @Scheduled (cron = "${deployment.sortDictionaryFile.cronExp}")
-    public void sortDictionaryFileAnswers() throws IOException {
+    public void sortDictionaryFile() throws IOException {
         log.info("Sorting of dictionary files started");
         File file = emailUtil.getDictionaryAttachment().orElseThrow(RuntimeException::new);
         Set<String> resultSet = new TreeSet<>();
