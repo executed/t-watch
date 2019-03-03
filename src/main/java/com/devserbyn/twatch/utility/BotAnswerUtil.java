@@ -19,6 +19,9 @@ public class BotAnswerUtil {
             boolean occurrenceFound = false;
             String line;
             while ((line = br.readLine()) != null) {
+                if (!line.contains("=")) {
+                    continue;
+                }
                 String foundKey = line.substring(0, (line.indexOf("=") - 1));
                 if (foundKey.equals(key)) {
                     occurrenceFound = true;

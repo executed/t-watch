@@ -23,15 +23,12 @@ public class BotAnswerServiceImpl implements BotAnswerService{
 
     @Override
     public String lookForAnswer(String message, Class<? extends BaseBot> botClass) {
-        long startTimeMillis = System.nanoTime();
         String fileWithAnswersPath = STR_CONST.BOT_ANSWER_FILES_PREFIX
                                      + botClass.getSimpleName().toLowerCase()
                                      + BOT_ANSWER_FILES_POSTFIX;
         String key = message.toUpperCase();
         try {
-            String answer = BotAnswerUtil.processRandomAnswer(fileWithAnswersPath, key);
-            log.info("Looking for answer time {}", (System.nanoTime() - startTimeMillis));
-            return answer;
+            return BotAnswerUtil.processRandomAnswer(fileWithAnswersPath, key);
         } catch (IOException e) {
             log.error("Problem while processing random answer", e);
             return STR_CONST.BOT_ANSWER_ERROR;
