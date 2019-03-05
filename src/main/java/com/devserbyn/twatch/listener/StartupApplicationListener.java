@@ -1,6 +1,8 @@
 package com.devserbyn.twatch.listener;
 
+import com.devserbyn.twatch.model.bo.ApplicationBO;
 import com.devserbyn.twatch.service.ApplicationService;
+import com.devserbyn.twatch.service.DeploymentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
@@ -15,9 +17,14 @@ public class StartupApplicationListener implements ApplicationListener<Applicati
 
     private final ApplicationService applicationService;
     private final ApplicationArguments applicationArguments;
+    private final ApplicationBO applicationBO;
+    private final DeploymentService deploymentService;
 
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {
         applicationService.resolveApplicationArgs(applicationArguments.getSourceArgs());
+        if (applicationBO.isDevelopmentMode()) {
+            deploymentService.startupBotByHand();
+        }
     }
 }

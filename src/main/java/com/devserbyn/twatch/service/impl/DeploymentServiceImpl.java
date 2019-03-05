@@ -43,4 +43,20 @@ public class DeploymentServiceImpl implements DeploymentService {
             log.trace("Snoozing prevention job succeeded");
         }
     }
+
+    @Override
+    public void startupBotByHand() {
+        accessURL(env.getProperty("deployment.startupBotContextPath.develop"));
+    }
+
+    private void accessURL(String url){
+        try {
+            String pageLoadTimeoutStr = env.getProperty("deployment.preventScheduling.pageLoadTimeout");
+            Jsoup.connect(url)
+                 .timeout(Integer.valueOf(requireNonNull(pageLoadTimeoutStr)))
+                 .get();
+        } catch (IOException e) {
+            log.error("Something went wrong while accessing URL {}", url, e);
+        }
+    }
 }

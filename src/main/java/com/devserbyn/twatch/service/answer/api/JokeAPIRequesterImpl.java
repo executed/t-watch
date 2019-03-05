@@ -29,6 +29,10 @@ public class JokeAPIRequesterImpl implements JokeAPIRequester{
                                .execute()
                                .body();
             final ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
+            // If there are no fields in json (joke string based in root node)
+            if (params.getJsonFieldName() == null) {
+                return Optional.of(node.asText());
+            }
             if (node.has(params.getJsonFieldName())) {
                 return Optional.of(node.get(params.getJsonFieldName()).asText());
             } else {
