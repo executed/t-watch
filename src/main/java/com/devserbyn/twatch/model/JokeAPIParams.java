@@ -10,5 +10,5 @@ import lombok.Setter;
 public class JokeAPIParams {
 
     private String host;
-    private String jsonFieldName;
+    private String jsonNodePath;
 }

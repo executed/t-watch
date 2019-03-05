@@ -1,7 +1,6 @@
 package com.devserbyn.twatch.utility;
 
 import com.devserbyn.twatch.constant.PATH_CONST;
-import com.devserbyn.twatch.constant.PROPERTY_CONST;
 import com.devserbyn.twatch.model.JokeAPIParams;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.PropertySource;
@@ -11,8 +10,6 @@ import org.springframework.stereotype.Component;
 
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Random;
 
@@ -53,7 +50,7 @@ public class PropertyUtil {
         String jsonFieldProperty = String.format(API_JOKE_JSON_FIELD_FORMAT, supportedApiNames[randomApiNameIdx]);
 
         return JokeAPIParams.builder().host(env.getProperty(hostProperty))
-                                      .jsonFieldName(env.getProperty(jsonFieldProperty))
+                                      .jsonNodePath(env.getProperty(jsonFieldProperty))
                                       .build();
     }
 }
