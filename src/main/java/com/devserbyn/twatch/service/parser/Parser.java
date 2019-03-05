@@ -1,6 +1,5 @@
 package com.devserbyn.twatch.service.parser;
 
-import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,7 +9,7 @@ import java.util.List;
 
 public interface Parser {
 
-    void processTextByZPath(String host, String path);
+    String processZPath(String host, String path);
 
     default Document getAndConnectDocument(String url) throws IOException {
         return Jsoup.connect(url).get();
