@@ -48,12 +48,12 @@ public class PropertyUtil {
     public JokeAPIParams getRandomJokeAPIParams() {
         String[] supportedApiNames = env.getProperty(API_JOKE_SERV_NAMES)
                                         .split(API_JOKE_SERV_NAMES_SPLITERATOR);
-        int randomApiName = new Random().nextInt() * supportedApiNames.length;
-        String hostProperty = String.format(API_JOKE_HOST_FORMAT, randomApiName);
-        String jsonFieldProperty = String.format(API_JOKE_JSON_FIELD_FORMAT, randomApiName);
+        int randomApiNameIdx = new Random().nextInt(supportedApiNames.length);
+        String hostProperty = String.format(API_JOKE_HOST_FORMAT, supportedApiNames[randomApiNameIdx]);
+        String jsonFieldProperty = String.format(API_JOKE_JSON_FIELD_FORMAT, supportedApiNames[randomApiNameIdx]);
 
-        return JokeAPIParams.builder().host(hostProperty)
-                                      .jsonFieldName(jsonFieldProperty)
+        return JokeAPIParams.builder().host(env.getProperty(hostProperty))
+                                      .jsonFieldName(env.getProperty(jsonFieldProperty))
                                       .build();
     }
 }
