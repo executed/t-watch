@@ -1,6 +1,8 @@
 package com.devserbyn.twatch.service.answer.api;
 
 import com.devserbyn.twatch.model.JokeAPIParams;
+import com.devserbyn.twatch.model.JokeParsedParams;
+import com.devserbyn.twatch.service.parser.JokeParser;
 import com.devserbyn.twatch.utility.JsonUtil;
 import com.devserbyn.twatch.utility.PropertyUtil;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @Slf4j
@@ -18,21 +21,32 @@ public class JokeAPIRequesterImpl implements JokeAPIRequester{
 
     private final PropertyUtil propertyUtil;
     private final JsonUtil jsonUtil;
+    private final JokeParser jokeParser;
 
     @Override
     public Optional<String> getRandomJoke() {
-        // TODO: Request jokes from various API
+        int randomInt = new Random().nextInt(2);
+        return (randomInt == 0) ? getApiJoke()
+                                : getParsedJoke();
+    }
+
+    private Optional<String> getApiJoke() {
         try {
             final JokeAPIParams params = propertyUtil.getRandomJokeAPIParams();
             String json = Jsoup.connect(params.getHost())
-                               .ignoreContentType(true)
-                               .execute()
-                               .body();
+                    .ignoreContentType(true)
+                    .execute()
+                    .body();
             String result = jsonUtil.getJsonNodeTextByPath(json, params.getJsonNodePath());
             return Optional.of(result);
         } catch (IOException e) {
             log.error("Something wrong while getting joke string from API", e);
             return Optional.empty();
         }
+    }
+
+    private Optional<String> getParsedJoke() {
+        final JokeParsedParams params = propertyUtil.getRandomJokeParsedParams();
+        return jokeParser.processZPath(params.getHost(), params.getXPath());
     }
 }

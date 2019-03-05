@@ -16,9 +16,13 @@ public final class PROPERTY_CONST {
     public static final String DEPLOYMENT_PREV_SCHED_LOAD_TIMEOUT = "deployment.preventScheduling.pageLoadTimeout";
 
     public static final String API_JOKE_SERV_NAMES = "api.joke.supportedServices";
+    public static final String PARSER_JOKE_SERV_NAMES = "parser.joke.supportedServices";
     public static final String API_JOKE_SERV_NAMES_SPLITERATOR = ", ";
     public static final String API_JOKE_JSON_PATH_SPLITERATOR = ", ";
+    public static final String PARSER_JOKE_SERV_NAMES_SPLITERATOR = ", ";
     public static final String API_JOKE_HOST_FORMAT = "api.joke.%s.host";
+    public static final String PARSER_JOKE_HOST_FORMAT = "parser.joke.%s.host";
     public static final String API_JOKE_JSON_FIELD_FORMAT = "api.joke.%s.json.field";
+    public static final String PARSER_JOKE_XPATH_FORMAT = "api.joke.%s.xpath";
 
 }

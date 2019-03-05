@@ -116,6 +116,13 @@
             <version>${jackson-databind.ver}</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.sourceforge.htmlcleaner</groupId>
+            <artifactId>htmlcleaner</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

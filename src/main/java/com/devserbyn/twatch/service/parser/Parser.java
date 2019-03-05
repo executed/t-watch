@@ -2,29 +2,31 @@ package com.devserbyn.twatch.service.parser;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
 import java.io.IOException;
-import java.util.List;
+import java.util.Optional;
 
 public interface Parser {
 
-    String processZPath(String host, String path);
+    Optional<String> processZPath(String host, String zPath);
 
-    default Document getAndConnectDocument(String url) throws IOException {
-        return Jsoup.connect(url).get();
+    default Document getAndConnectDocument(String url){
+        try {
+            return Jsoup.connect(url).get();
+        } catch (IOException e) {
+            throw new RuntimeException("Error during getting document by URL", e);
+        }
     }
 
-    default Element getElementByZPath(Element element, List<String> ZPathList, int counter){
-        if(counter == ZPathList.size()) {
-            return element;
+    default String getElementValueByZPath(org.w3c.dom.Document doc, String xPath){
+        try {
+            XPath xpath = XPathFactory.newInstance().newXPath();
+            return (String) xpath.evaluate(xPath, doc, XPathConstants.STRING);
+        } catch (Exception e) {
+            throw new RuntimeException("Error during processing XPath", e);
         }
-        Element nextElement;
-        String node = ZPathList.get(counter);
-        if (node.contains("child")) {
-            nextElement = element.child(Integer.valueOf("" + node.charAt(7)));
-        }
-        else nextElement = element.select(ZPathList.get(counter)).first();
-        return getElementByZPath(nextElement, ZPathList, ++counter);
     }
 }
