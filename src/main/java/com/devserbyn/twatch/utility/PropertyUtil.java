@@ -2,7 +2,6 @@ package com.devserbyn.twatch.utility;
 
 import com.devserbyn.twatch.constant.PATH_CONST;
 import com.devserbyn.twatch.model.JokeAPIParams;
-import com.devserbyn.twatch.model.JokeParsedParams;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
@@ -52,18 +51,7 @@ public class PropertyUtil {
 
         return JokeAPIParams.builder().host(env.getProperty(hostProperty))
                                       .jsonNodePath(env.getProperty(jsonFieldProperty))
+                                      .userAgent(env.getProperty(API_JOKE_BASIC_USER_AGENT))
                                       .build();
-    }
-
-    public JokeParsedParams getRandomJokeParsedParams() {
-        String[] supportedApiNames = env.getProperty(PARSER_JOKE_SERV_NAMES)
-                                        .split(PARSER_JOKE_SERV_NAMES_SPLITERATOR);
-        int randomApiNameIdx = new Random().nextInt(supportedApiNames.length);
-        String hostProperty = String.format(PARSER_JOKE_HOST_FORMAT, supportedApiNames[randomApiNameIdx]);
-        String xpathProperty = String.format(PARSER_JOKE_XPATH_FORMAT, supportedApiNames[randomApiNameIdx]);
-
-        return JokeParsedParams.builder().host(env.getProperty(hostProperty))
-                                         .xPath(env.getProperty(xpathProperty))
-                                         .build();
     }
 }

@@ -23,6 +23,8 @@ public final class PROPERTY_CONST {
     public static final String API_JOKE_HOST_FORMAT = "api.joke.%s.host";
     public static final String PARSER_JOKE_HOST_FORMAT = "parser.joke.%s.host";
     public static final String API_JOKE_JSON_FIELD_FORMAT = "api.joke.%s.json.field";
-    public static final String PARSER_JOKE_XPATH_FORMAT = "api.joke.%s.xpath";
+    public static final String API_JOKE_BASIC_USER_AGENT = "api.userAgent.basic";
+    public static final String PARSER_JOKE_XPATH_FORMAT = "parser.joke.%s.xpath";
+    public static final String API_JSON_EMPTY_NODE = "e_node";
 
 }

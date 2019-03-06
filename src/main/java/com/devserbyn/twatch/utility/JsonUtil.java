@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.devserbyn.twatch.constant.PROPERTY_CONST.API_JOKE_JSON_PATH_SPLITERATOR;
+import static com.devserbyn.twatch.constant.PROPERTY_CONST.API_JSON_EMPTY_NODE;
 
 @Component
 @RequiredArgsConstructor
@@ -33,10 +34,15 @@ public class JsonUtil {
         if (count == nodeNames.size()) {
             return prevNode.asText();
         }
-        if (prevNode.has(nodeNames.get(count))) {
-            return getLastNodeText(prevNode.get(nodeNames.get(count)), nodeNames, ++count);
-        } else {
-            throw new RuntimeException();
+        String nextNodeName = nodeNames.get(count);
+        if (nextNodeName.contains(API_JSON_EMPTY_NODE)) {
+            // Placement of index in node name
+            int emptyNodeIdx = Character.getNumericValue(nextNodeName.charAt(6));
+            return getLastNodeText(prevNode.get(emptyNodeIdx), nodeNames, ++count);
         }
+        if (prevNode.has(nextNodeName)) {
+            return getLastNodeText(prevNode.get(nodeNames.get(count)), nodeNames, ++count);
+        }
+        return null;
     }
 }

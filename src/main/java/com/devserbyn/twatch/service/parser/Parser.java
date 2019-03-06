@@ -15,7 +15,7 @@ public interface Parser {
 
     default Document getAndConnectDocument(String url){
         try {
-            return Jsoup.connect(url).get();
+            return Jsoup.connect(url).timeout(10000000).get();
         } catch (IOException e) {
             throw new RuntimeException("Error during getting document by URL", e);
         }

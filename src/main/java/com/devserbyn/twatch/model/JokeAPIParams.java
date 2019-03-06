@@ -11,4 +11,5 @@ public class JokeAPIParams {
 
     private String host;
     private String jsonNodePath;
+    private String userAgent;
 }
