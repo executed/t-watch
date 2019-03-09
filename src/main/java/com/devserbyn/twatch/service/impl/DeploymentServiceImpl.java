@@ -47,7 +47,7 @@ public class DeploymentServiceImpl implements DeploymentService {
     @Override
     public void startupBotByHand() {
 	String url = applicationBO.isDevelopmentMode() ? env.getProperty("deployment.startupBotContextPath.develop")
-						       : env.getProperty("deployment.startupBotContextPath.production")
+						       : env.getProperty("deployment.startupBotContextPath.production");
         accessURL(url);
     }
 
