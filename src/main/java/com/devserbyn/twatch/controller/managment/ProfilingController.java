@@ -11,7 +11,7 @@ public class ProfilingController implements ProfilingControllerMBean{
     private boolean enabled;
 
     public boolean isEnabled() {
-        return enabled;
+        return this.enabled;
     }
 
     public void setEnabled(boolean enabled) {

@@ -1,7 +1,9 @@
 package com.devserbyn.twatch.service.impl;
 
+import com.devserbyn.twatch.constant.PROPERTY_CONST;
 import com.devserbyn.twatch.model.bo.ApplicationBO;
 import com.devserbyn.twatch.service.DeploymentService;
+import com.devserbyn.twatch.utility.WebUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+import static com.devserbyn.twatch.constant.PROPERTY_CONST.DEPLOYMENT_STARTUP_LOAD_TIMEOUT;
 import static java.util.Objects.requireNonNull;
 
 @Service
@@ -26,22 +29,20 @@ public class DeploymentServiceImpl implements DeploymentService {
 
     private final Environment env;
     private final ApplicationBO applicationBO;
+    private final WebUtil webUtil;
 
     /** Requests for page of current app to forbid deployment server snoozing process */
     @Scheduled (cron = "${deployment.preventScheduling.cronExp}")
-    public void postponeSnoozeOnServer() throws IOException {
+    public void postponeSnoozeOnServer() {
         if (applicationBO.isDevelopmentMode()) {
             return;
         }
         log.trace("Snoozing prevention job started");
-        String contextPath = env.getProperty("deployment.contextPath");
-        String pageLoadTimeoutStr = env.getProperty("deployment.startup.pageLoadTimeout");
-        Document doc = Jsoup.connect(contextPath)
-                            .timeout(Integer.valueOf(requireNonNull(pageLoadTimeoutStr)))
-                            .get();
-        if (doc != null) {
-            log.trace("Snoozing prevention job succeeded");
-        }
+
+        String url = env.getProperty("deployment.contextPath");
+        webUtil.accessURL(url);
+
+        log.trace("Snoozing prevention job succeeded");
     }
 
     @Override
@@ -49,17 +50,8 @@ public class DeploymentServiceImpl implements DeploymentService {
 	String url = applicationBO.isDevelopmentMode()
                                ? env.getProperty("deployment.startupBotContextPath.develop")
 						       : env.getProperty("deployment.startupBotContextPath.production");
-        accessURL(url);
-    }
+	int loadPageTimeout = Integer.parseInt(requireNonNull(env.getProperty(DEPLOYMENT_STARTUP_LOAD_TIMEOUT)));
 
-    private void accessURL(String url, int timeout){
-        try {
-            Jsoup.connect(url)
-                 .timeout(timeout)
-                 .ignoreContentType(true)
-                 .get();
-        } catch (IOException e) {
-            log.error("Something went wrong while accessing URL {}", url, e);
-        }
+	webUtil.accessURL(url, loadPageTimeout);
     }
 }

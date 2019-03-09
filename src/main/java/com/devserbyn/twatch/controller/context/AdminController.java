@@ -1,5 +1,6 @@
 package com.devserbyn.twatch.controller.context;
 
+import com.devserbyn.twatch.model.bo.ApplicationBO;
 import com.devserbyn.twatch.model.bot.MainBot;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,11 +17,16 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 public class AdminController {
 
     private final MainBot bot;
+    private final ApplicationBO applicationBO;
 
     @GetMapping("/start")
     public ModelAndView addEvent() throws TelegramApiRequestException {
-        new TelegramBotsApi().registerBot(bot);
-        log.info("Bot {} was registered", MainBot.class);
+
+        if (!applicationBO.getRegisteredBots().contains(bot)) {
+            new TelegramBotsApi().registerBot(bot);
+            applicationBO.getRegisteredBots().add(this.bot);
+            log.info("Bot {} was registered", MainBot.class);
+        }
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("success");

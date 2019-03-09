@@ -9,11 +9,10 @@ public final class PROPERTY_CONST {
     public static final String JMX_ANNOTATION_KEY = "jmx.annotation.%s.key";
     public static final String JMX_ANNOTATION_VALUE = "jmx.annotation.%s.value";
 
-    public static final String DEPLOYMENT_PREV_SCHED_CRON_EXP = "${deployment.preventScheduling.cronExp}";
-    public static final String DEPLOYMENT_ACTIV_STAT_MSG_CRON_EXP = "${deployment.activityStatusMessage.cronExp}";
-    public static final String DEPLOYMENT_SEND_DICT_FILE_CRON_EXP = "${deployment.sendDictionaryFile.cronExp}";
-    public static final String DEPLOYMENT_CONTEXT_PATH = "deployment.contextPath";
-    public static final String DEPLOYMENT_PREV_SCHED_LOAD_TIMEOUT = "deployment.preventScheduling.pageLoadTimeout";
+    public static final String DEPLOYMENT_STARTUP_LOAD_TIMEOUT = "deployment.startup.pageLoadTimeout";
+    public static final String DEPLOYMENT_PAGE_LOAD_TIMEOUT = "deployment.pages.pageLoadTimeout";
+    public static final String DEPLOYMENT_STARTUP_LOAD_TIMEOUT_EL = "${deployment.startup.pageLoadTimeout}";
+    public static final String DEPLOYMENT_PAGE_LOAD_TIMEOUT_EL = "${deployment.pages.pageLoadTimeout}";
 
     public static final String API_JOKE_SERV_NAMES = "api.joke.supportedServices";
     public static final String PARSER_JOKE_SERV_NAMES = "parser.joke.supportedServices";

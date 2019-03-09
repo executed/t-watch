@@ -1,6 +1,5 @@
 package com.devserbyn.twatch.listener;
 
-import com.devserbyn.twatch.model.bo.ApplicationBO;
 import com.devserbyn.twatch.service.ApplicationService;
 import com.devserbyn.twatch.service.DeploymentService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,6 @@ public class StartupApplicationListener implements ApplicationListener<Applicati
 
     private final ApplicationService applicationService;
     private final ApplicationArguments applicationArguments;
-    private final ApplicationBO applicationBO;
     private final DeploymentService deploymentService;
 
     @Override

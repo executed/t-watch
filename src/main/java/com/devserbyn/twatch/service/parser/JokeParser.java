@@ -1,6 +1,7 @@
 package com.devserbyn.twatch.service.parser;
 
 import com.devserbyn.twatch.utility.ParserUtil;
+import com.devserbyn.twatch.utility.WebUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,12 @@ import java.util.Optional;
 public class JokeParser implements Parser {
 
     private final ParserUtil parserUtil;
+    private final WebUtil webUtil;
 
-    public Optional<String> processZPath(String url, String zPathString) {
-        Document document = parserUtil.convertJsoupDocToW3c(getAndConnectDocument(url))
+    public Optional<String> processZPath(String url, String xPath) {
+        Document document = parserUtil.convertJsoupDocToW3c(webUtil.getDocumentByURL(url))
                                       .orElseThrow(RuntimeException::new);
-        String result = this.getElementValueByZPath(document, zPathString);
+        String result = this.getElementValueByXPath(document, xPath);
         return Optional.of(result);
     }
 }

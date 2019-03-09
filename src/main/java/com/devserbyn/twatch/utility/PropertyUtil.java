@@ -51,7 +51,6 @@ public class PropertyUtil {
 
         return JokeAPIParams.builder().host(env.getProperty(hostProperty))
                                       .jsonNodePath(env.getProperty(jsonFieldProperty))
-                                      .userAgent(env.getProperty(API_JOKE_BASIC_USER_AGENT))
                                       .build();
     }
 }
