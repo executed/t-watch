@@ -9,8 +9,11 @@ import org.telegram.telegrambots.ApiContextInitializer;
 @EnableScheduling
 public class TwatchApplication {
 
-    public static void main(String[] args) {
+    static {
         ApiContextInitializer.init();
+    }
+
+    public static void main(String[] args) {
         SpringApplication.run(TwatchApplication.class, args);
     }
 }
