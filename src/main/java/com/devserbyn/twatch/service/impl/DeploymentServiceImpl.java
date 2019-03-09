@@ -35,7 +35,7 @@ public class DeploymentServiceImpl implements DeploymentService {
         }
         log.trace("Snoozing prevention job started");
         String contextPath = env.getProperty("deployment.contextPath");
-        String pageLoadTimeoutStr = env.getProperty("deployment.preventScheduling.pageLoadTimeout");
+        String pageLoadTimeoutStr = env.getProperty("deployment.startup.pageLoadTimeout");
         Document doc = Jsoup.connect(contextPath)
                             .timeout(Integer.valueOf(requireNonNull(pageLoadTimeoutStr)))
                             .get();
@@ -46,16 +46,16 @@ public class DeploymentServiceImpl implements DeploymentService {
 
     @Override
     public void startupBotByHand() {
-	String url = applicationBO.isDevelopmentMode() ? env.getProperty("deployment.startupBotContextPath.develop")
+	String url = applicationBO.isDevelopmentMode()
+                               ? env.getProperty("deployment.startupBotContextPath.develop")
 						       : env.getProperty("deployment.startupBotContextPath.production");
         accessURL(url);
     }
 
-    private void accessURL(String url){
+    private void accessURL(String url, int timeout){
         try {
-            String pageLoadTimeoutStr = env.getProperty("deployment.preventScheduling.pageLoadTimeout");
             Jsoup.connect(url)
-                 .timeout(Integer.valueOf(requireNonNull(pageLoadTimeoutStr)))
+                 .timeout(timeout)
                  .ignoreContentType(true)
                  .get();
         } catch (IOException e) {

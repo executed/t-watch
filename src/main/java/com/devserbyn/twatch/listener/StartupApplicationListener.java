@@ -23,6 +23,6 @@ public class StartupApplicationListener implements ApplicationListener<Applicati
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {
         applicationService.resolveApplicationArgs(applicationArguments.getSourceArgs());
-            deploymentService.startupBotByHand();
+        deploymentService.startupBotByHand();
     }
 }
