@@ -3,6 +3,9 @@ package com.devserbyn.twatch.utility;
 import com.devserbyn.twatch.constant.STR_CONST;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -47,5 +50,9 @@ public class BotAnswerUtil {
             writer.newLine();
             writer.write(answerLine);
         }
+    }
+
+    public static BotApiMethod wrapIntoApiMethod(String text, Update update) {
+        return new SendMessage(update.getMessage().getChatId(), text);
     }
  }

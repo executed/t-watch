@@ -1,6 +1,6 @@
 package com.devserbyn.twatch.constant;
 
-public class MAIL_CONST {
+public final class MAIL_CONST {
 
     // Email template keys
     public static final String EMAIL_MAIN_TITLE_ID = "${MAIN_TITLE}";

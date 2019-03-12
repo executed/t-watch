@@ -25,7 +25,7 @@ public abstract class BaseBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        Optional<BotApiMethod> response = dispatcher.handleUpdate(update);
+        Optional<BotApiMethod> response = dispatcher.handleUpdate(update, this.getClass());
         response.ifPresent(this::sendResponse);
     }
 

@@ -9,8 +9,8 @@
 
 <div class="main">
   <div>
-        <form action="${pageContext.request.contextPath}/start">
-            <input type="submit" title="Start Bot"/>
+        <form action="/start">
+            <input type="submit" name="Start bot"/>
         </form>
   </div>
 </div>

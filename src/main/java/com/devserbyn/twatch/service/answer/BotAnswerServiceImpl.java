@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 
 import static com.devserbyn.twatch.constant.STR_CONST.BOT_ANSWER_FILES_POSTFIX;
+import static com.devserbyn.twatch.constant.STR_CONST.BOT_SERVICE_RESPONSE_POSTFIX;
 
 @RequiredArgsConstructor
 @Service
@@ -52,6 +53,20 @@ public class BotAnswerServiceImpl implements BotAnswerService{
             fileScheduleService.sortDictionaryFile();
         } catch (IOException e) {
             log.error("Something wrong while learning new bot answer", e);
+        }
+    }
+
+    @Override
+    public String lookForServiceResponse(String key, Class<? extends BaseBot> botClass) {
+        String fileWithAnswersPath = STR_CONST.BOT_SERVICE_RESPONSE_FILES_PREFIX
+                + botClass.getSimpleName().toLowerCase()
+                + BOT_SERVICE_RESPONSE_POSTFIX;
+        String formattedKey = key.toUpperCase();
+        try {
+            return BotAnswerUtil.processRandomAnswer(fileWithAnswersPath, formattedKey);
+        } catch (IOException e) {
+            log.error("Problem while processing service response", e);
+            return STR_CONST.BOT_ANSWER_ERROR;
         }
     }
 }

@@ -1,14 +1,13 @@
 package com.devserbyn.twatch.controller.impl;
 
 import com.devserbyn.twatch.controller.Dispatcher;
-import com.devserbyn.twatch.model.bot.MainBot;
-import com.devserbyn.twatch.service.answer.BotAnswerService;
-import com.devserbyn.twatch.service.answer.api.JokeAPIRequester;
+import com.devserbyn.twatch.controller.RequestResolver;
+import com.devserbyn.twatch.model.bot.BaseBot;
+import com.devserbyn.twatch.service.DispatcherService;
+import com.devserbyn.twatch.service.ExceptionHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.Optional;
@@ -17,31 +16,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class DispatcherImpl implements Dispatcher {
 
-    private final BotAnswerService service;
-    private final JokeAPIRequester jokeService;
+    private final DispatcherService dispatcherService;
+    private final ExceptionHandler exceptionHandler;
 
     @Override
-    public Optional<BotApiMethod> handleUpdate(Update update) {
-        //to be continued...
-        Message msg = update.getMessage();
-        if (msg == null) {
-            return Optional.empty();
+    public Optional<BotApiMethod> handleUpdate(Update update, Class<? extends BaseBot> botClass) {
+        RequestResolver requestResolver = dispatcherService.getBotRequestResolver(botClass);
+
+        try {
+            return requestResolver.resolveUpdate(update);
+        } catch (Exception e) {
+            return exceptionHandler.handleException(e, update, botClass);
         }
-        String msgText = msg.getText();
-
-        SendMessage sendMsg = new SendMessage();
-
-        if (msgText.contains("dict")) {
-            service.learnNewAnswer(msgText, MainBot.class);
-        } else if(msgText.equals("/joke")) {
-            sendMsg.setText(jokeService.getRandomJoke().orElseThrow(RuntimeException::new));
-            sendMsg.setChatId(update.getMessage().getChatId());
-            return Optional.of(sendMsg);
-        }
-        String answer = service.lookForAnswer(msgText, MainBot.class);
-        sendMsg.setText(answer);
-        sendMsg.setChatId(update.getMessage().getChatId());
-
-        return Optional.of(sendMsg);
     }
 }

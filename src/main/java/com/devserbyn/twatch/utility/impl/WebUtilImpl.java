@@ -45,7 +45,7 @@ public class WebUtilImpl implements WebUtil {
                 default: return Optional.empty();
             }
         } catch (IOException e) {
-            log.error("Something wrong while accessing URL: {}", e.getMessage());
+            log.error("Something wrong while accessing URL", e.getMessage());
             return Optional.empty();
         }
     }
