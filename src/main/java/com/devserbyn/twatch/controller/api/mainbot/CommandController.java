@@ -28,7 +28,7 @@ public class CommandController implements ApiController {
                 return BotAnswerUtil.wrapIntoApiMethod(response, update);
             }
             default: {
-                return null;
+                return BotAnswerUtil.wrapIntoApiMethod("Command wasn't recognized", update);
             }
         }
     }
