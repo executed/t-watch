@@ -13,6 +13,11 @@
         </h1>
     </div>
 </div>
+<div class="navigate">
+    <form action="/">
+        <input type="submit" value="Start page"/>
+    </form>
+</div>
 <div>
     <div>
         <p>Design by <a href="#">T-Watch</a></p>

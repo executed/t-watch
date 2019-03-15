@@ -26,6 +26,13 @@ public class AdminController {
        return new ModelAndView(VIEW_CONST.SUCCESS_VIEW);
     }
 
+    @GetMapping("/stop")
+    public ModelAndView detachBot() {
+        botRegisterService.stop(MainBot.class);
+
+        return new ModelAndView(VIEW_CONST.SUCCESS_VIEW);
+    }
+
     @GetMapping("/error")
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ModelAndView errorPage()  {

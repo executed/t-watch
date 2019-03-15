@@ -13,6 +13,10 @@ public final class PROPERTY_CONST {
     public static final String DEPLOYMENT_PAGE_LOAD_TIMEOUT = "deployment.pages.pageLoadTimeout";
     public static final String DEPLOYMENT_STARTUP_LOAD_TIMEOUT_EL = "${deployment.startup.pageLoadTimeout}";
     public static final String DEPLOYMENT_PAGE_LOAD_TIMEOUT_EL = "${deployment.pages.pageLoadTimeout}";
+    public static final String DEPLOYMENT_BOT_START_PROD_HOST = "deployment.startupBotContextPath.production";
+    public static final String DEPLOYMENT_BOT_START_DEV_HOST = "deployment.startupBotContextPath.develop";
+    public static final String DEPLOYMENT_BOT_STOP_PROD_HOST = "deployment.stopBotContextPath.develop";
+    public static final String DEPLOYMENT_BOT_STOP_DEV_HOST = "deployment.stopBotContextPath.production";
 
     public static final String API_JOKE_SERV_NAMES = "api.joke.supportedServices";
     public static final String PARSER_JOKE_SERV_NAMES = "parser.joke.supportedServices";

@@ -52,6 +52,9 @@ public class DeploymentServiceImpl implements DeploymentService {
     @Override
     public void startupBotByHand() {
         try {
+            if (applicationBO.isDevelopmentMode()) {
+                botRegisterService.stopOnRemote();
+            }
             botRegisterService.register(MainBot.class);
         } catch (TelegramApiRequestException e) {
             log.error("Something went wrong while starting bot by hand", e);

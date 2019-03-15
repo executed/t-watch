@@ -27,6 +27,10 @@ public class PropertyUtil {
 
     private final Environment env;
 
+    public String getProperty(String propertyName) {
+        return env.getProperty(propertyName);
+    }
+
     public String getBotPropertyByFormat(String className, String format) {
         String propertyKey = String.format(format, className);
         String value = env.getProperty(String.format(propertyKey, className));
