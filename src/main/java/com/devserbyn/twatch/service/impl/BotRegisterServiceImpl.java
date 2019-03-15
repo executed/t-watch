@@ -78,6 +78,6 @@ public class BotRegisterServiceImpl implements BotRegisterService {
         String url = propertyUtil.getProperty(PROPERTY_CONST.DEPLOYMENT_BOT_STOP_DEV_HOST);
         context.getBean(WebUtil.class).accessURL(url);
 
-        log.info("Bot {} on remote {} was started", MainBot.class, url);
+        log.info("Bot {} on remote {} was stopped", MainBot.class, url);
     }
 }
