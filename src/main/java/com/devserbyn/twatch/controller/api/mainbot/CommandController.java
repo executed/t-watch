@@ -2,6 +2,8 @@ package com.devserbyn.twatch.controller.api.mainbot;
 
 import com.devserbyn.twatch.exception.TwatchException;
 import com.devserbyn.twatch.service.answer.api.JokeAPIRequester;
+import com.devserbyn.twatch.service.parser.Currency;
+import com.devserbyn.twatch.service.parser.CurrencyParser;
 import com.devserbyn.twatch.utility.BotAnswerUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 public class CommandController implements ApiController {
 
     private final JokeAPIRequester jokeService;
+    private final CurrencyParser currencyParser;
 
     @Override
     public BotApiMethod handle(Update update) {
@@ -25,6 +28,10 @@ public class CommandController implements ApiController {
             }
             case "/start": {
                 String response = "Welcome";
+                return BotAnswerUtil.wrapIntoApiMethod(response, update);
+            }
+            case "/currency": {
+                String response = currencyParser.parseCurrencyValues(Currency.USD, Currency.UAH);
                 return BotAnswerUtil.wrapIntoApiMethod(response, update);
             }
             default: {
