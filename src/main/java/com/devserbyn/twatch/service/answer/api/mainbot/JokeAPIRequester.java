@@ -1,4 +1,4 @@
-package com.devserbyn.twatch.service.answer.api;
+package com.devserbyn.twatch.service.answer.api.mainbot;
 
 import java.util.Optional;
 

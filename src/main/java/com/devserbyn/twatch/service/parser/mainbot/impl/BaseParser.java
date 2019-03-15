@@ -1,6 +1,6 @@
-package com.devserbyn.twatch.service.parser.impl;
+package com.devserbyn.twatch.service.parser.mainbot.impl;
 
-import com.devserbyn.twatch.service.parser.Parser;
+import com.devserbyn.twatch.service.parser.mainbot.Parser;
 import com.devserbyn.twatch.utility.ParserUtil;
 import com.devserbyn.twatch.utility.WebUtil;
 import lombok.AllArgsConstructor;

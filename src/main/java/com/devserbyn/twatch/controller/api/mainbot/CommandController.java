@@ -1,9 +1,8 @@
 package com.devserbyn.twatch.controller.api.mainbot;
 
-import com.devserbyn.twatch.exception.TwatchException;
-import com.devserbyn.twatch.service.answer.api.JokeAPIRequester;
-import com.devserbyn.twatch.service.parser.Currency;
-import com.devserbyn.twatch.service.parser.CurrencyParser;
+import com.devserbyn.twatch.service.answer.api.mainbot.JokeAPIRequester;
+import com.devserbyn.twatch.service.parser.mainbot.Currency;
+import com.devserbyn.twatch.service.parser.mainbot.CurrencyParser;
 import com.devserbyn.twatch.utility.BotAnswerUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

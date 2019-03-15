@@ -1,4 +1,4 @@
-package com.devserbyn.twatch.service.parser;
+package com.devserbyn.twatch.service.parser.mainbot;
 
 public interface CurrencyParser {
 

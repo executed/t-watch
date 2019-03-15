@@ -1,10 +1,9 @@
-package com.devserbyn.twatch.service.parser.impl;
+package com.devserbyn.twatch.service.parser.mainbot.impl;
 
-import com.devserbyn.twatch.service.parser.Currency;
-import com.devserbyn.twatch.service.parser.CurrencyParser;
+import com.devserbyn.twatch.service.parser.mainbot.Currency;
+import com.devserbyn.twatch.service.parser.mainbot.CurrencyParser;
 import com.devserbyn.twatch.utility.ParserUtil;
 import com.devserbyn.twatch.utility.WebUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
