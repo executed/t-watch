@@ -1,6 +1,7 @@
-package com.devserbyn.twatch.service.answer.api.mainbot;
+package com.devserbyn.twatch.service.answer.api.mainbot.impl;
 
 import com.devserbyn.twatch.model.JokeAPIParams;
+import com.devserbyn.twatch.service.answer.api.mainbot.JokeAPIRequester;
 import com.devserbyn.twatch.utility.JsonUtil;
 import com.devserbyn.twatch.utility.PropertyUtil;
 import com.devserbyn.twatch.utility.WebUtil;
@@ -13,7 +14,7 @@ import java.util.Optional;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class JokeAPIRequesterImpl implements JokeAPIRequester{
+public class JokeAPIRequesterImpl implements JokeAPIRequester {
 
     private final PropertyUtil propertyUtil;
     private final JsonUtil jsonUtil;
