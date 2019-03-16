@@ -1,2 +1,2 @@
-/START = *Welcome* I am Twatch bot. Will be glad to help you. For more functions type /commands
-/COMMANDS = Available commands: /joke - Get a funny joke.
+/START = *Welcome* '/n' I am Twatch bot. Will be glad to help you. '/n' For more functions type /commands
+/COMMANDS = Available commands: '/n'/joke - Get a funny joke.
