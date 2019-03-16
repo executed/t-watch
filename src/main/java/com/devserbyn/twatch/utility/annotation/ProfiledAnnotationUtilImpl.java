@@ -6,13 +6,14 @@ import com.devserbyn.twatch.utility.PropertyUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.management.MBeanServer;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
-@Component
+@Service
 @Slf4j
 @RequiredArgsConstructor
 public class ProfiledAnnotationUtilImpl implements ProfiledAnnotationUtil{
