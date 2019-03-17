@@ -64,8 +64,6 @@ public class BotAnswerUtil {
     }
 
     public static String replaceNewLineChars(String text) {
-        String ss = text.replaceAll(STR_CONST.BOT_ANSWER_NEW_LINE_CHAR, System.lineSeparator());
-        System.out.println(ss);
-        return ss;
+        return text.replaceAll(STR_CONST.BOT_ANSWER_NEW_LINE_CHAR, System.lineSeparator());
     }
  }
