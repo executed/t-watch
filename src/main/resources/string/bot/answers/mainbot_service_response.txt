@@ -1,1 +1,5 @@
 UNKNOWN = Sorry, something went wrong
+REGISTER_FAIL = *Error*'/n'Sorry, something went wrong. '/n'Perhaps you are already registered
+REGISTER_SUCCESS = *Success* '/n'Now you are a part of Twatch project
+DEREGISTER_FAIL = *Error*'/n'Sorry, something went wrong. '/n'Perhaps you were not registered
+DEREGISTER_SUCCESS = *Success* '/n'Your data was completely removed

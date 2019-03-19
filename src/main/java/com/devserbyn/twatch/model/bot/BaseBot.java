@@ -39,6 +39,7 @@ public abstract class BaseBot extends TelegramLongPollingBot {
         return registerService.getToken(this.getClass().getSimpleName());
     }
 
+    //TODO: Retry sending msg a specified amount of times (sometimes telegram throw exceptions)
     public void sendResponse(BotApiMethod msg) {
         try {
             // getting real impl of apimethod

@@ -15,4 +15,9 @@ public final class STR_CONST {
     public static final String BOT_RESOLVER_NAME_POSTFIX= "RequestResolver";
 
     public static final String BOT_ANSWER_NEW_LINE_CHAR = "'/n'";
+    public static final String BOT_ANSWER_SERVICE_UNKNOWN = "UNKNOWN";
+    public static final String BOT_ANSWER_SERVICE_REGISTER_SUCCESS = "REGISTER_SUCCESS";
+    public static final String BOT_ANSWER_SERVICE_REGISTER_FAIL = "REGISTER_FAIL";
+    public static final String BOT_ANSWER_SERVICE_DEREGISTER_FAIL = "DEREGISTER_FAIL";
+    public static final String BOT_ANSWER_SERVICE_DEREGISTER_SUCCESS = "DEREGISTER_SUCCESS";
 }
