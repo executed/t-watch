@@ -10,4 +10,10 @@ public interface BotRegisterService {
     String getUsername(String className);
 
     void register(Class<? extends BaseBot> botClass) throws TelegramApiRequestException;
+
+    void stop(Class<? extends BaseBot> botClass);
+
+    void stopOnRemote();
+
+    void startOnRemote();
 }

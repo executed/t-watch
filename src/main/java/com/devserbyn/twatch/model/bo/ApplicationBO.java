@@ -4,9 +4,10 @@ import com.devserbyn.twatch.model.bot.BaseBot;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.generics.BotSession;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 @Getter
@@ -14,5 +15,5 @@ import java.util.List;
 public class ApplicationBO {
 
     private boolean developmentMode = false;
-    private List<BaseBot> registeredBots = new ArrayList<>();
+    private Map<BaseBot, BotSession> registeredBots = new HashMap<>();
 }

@@ -53,6 +53,17 @@ public class BotAnswerUtil {
     }
 
     public static BotApiMethod wrapIntoApiMethod(String text, Update update) {
-        return new SendMessage(update.getMessage().getChatId(), text);
+        return wrapIntoApiMethod(text, update, false);
+    }
+
+    public static BotApiMethod wrapIntoApiMethod(String text, Update update, boolean md) {
+        text = replaceNewLineChars(text);
+        SendMessage sendMessage = new SendMessage(update.getMessage().getChatId(), text);
+        sendMessage.enableMarkdown(md);
+        return sendMessage;
+    }
+
+    public static String replaceNewLineChars(String text) {
+        return text.replaceAll(STR_CONST.BOT_ANSWER_NEW_LINE_CHAR, System.lineSeparator());
     }
  }

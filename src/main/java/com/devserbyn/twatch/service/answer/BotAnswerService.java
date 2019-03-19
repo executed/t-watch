@@ -9,4 +9,6 @@ public interface BotAnswerService {
     void learnNewAnswer(String answer, Class<? extends BaseBot> botClass);
 
     String lookForServiceResponse(String key, Class<? extends BaseBot> botClass);
+
+    String lookForCommandResponse(String key, Class<? extends BaseBot> botClass);
 }

@@ -6,13 +6,14 @@ import com.devserbyn.twatch.utility.PropertyUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import javax.management.MBeanServer;
+import javax.management.*;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
-@Component
+@Service
 @Slf4j
 @RequiredArgsConstructor
 public class ProfiledAnnotationUtilImpl implements ProfiledAnnotationUtil{
@@ -20,9 +21,13 @@ public class ProfiledAnnotationUtilImpl implements ProfiledAnnotationUtil{
     private final PropertyUtil propertyUtil;
 
     @Override
-    public void registerMBean(ProfilingController controller) throws Exception {
+    public void registerMBean(ProfilingController controller) {
         MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
-        mBeanServer.registerMBean(controller, propertyUtil.getJmxObjectName(Profiled.class));
+        try {
+            mBeanServer.registerMBean(controller, propertyUtil.getJmxObjectName(Profiled.class));
+        } catch (Exception e) {
+            log.error("Something went wrong while registering JMX ProfilingController");
+        }
     }
 
     @Override

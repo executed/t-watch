@@ -1,5 +1,6 @@
 package com.devserbyn.twatch.service.answer.api.mainbot.impl;
 
+import com.devserbyn.twatch.annotation.Profiled;
 import com.devserbyn.twatch.model.JokeAPIParams;
 import com.devserbyn.twatch.service.answer.api.mainbot.JokeAPIRequester;
 import com.devserbyn.twatch.utility.JsonUtil;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
+@Profiled
 @RequiredArgsConstructor
 public class JokeAPIRequesterImpl implements JokeAPIRequester {
 
