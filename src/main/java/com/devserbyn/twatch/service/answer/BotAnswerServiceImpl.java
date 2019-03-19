@@ -3,13 +3,17 @@ package com.devserbyn.twatch.service.answer;
 import com.devserbyn.twatch.constant.STR_CONST;
 import com.devserbyn.twatch.model.bo.BotAnswerBO;
 import com.devserbyn.twatch.model.bot.BaseBot;
+import com.devserbyn.twatch.model.bot.MainBot;
 import com.devserbyn.twatch.service.scheduled.DictionaryFileScheduleServiceImpl;
 import com.devserbyn.twatch.utility.BotAnswerUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static com.devserbyn.twatch.constant.STR_CONST.*;
 
@@ -82,4 +86,15 @@ public class BotAnswerServiceImpl implements BotAnswerService{
             return STR_CONST.BOT_ANSWER_ERROR;
         }
     }
+
+    @Override
+    public String getNotRegisteredResponse(Class<? extends BaseBot> botClass) {
+        return this.lookForServiceResponse(BOT_ANSWER_SERVICE_NOT_REG, MainBot.class);
+    }
+
+    @Override
+    public Optional<BotApiMethod> getNotRegisteredResponse(Update update, Class<? extends BaseBot> botClass) {
+        return Optional.of(BotAnswerUtil.wrapIntoApiMethod(getNotRegisteredResponse(botClass), update, true));
+    }
+
 }

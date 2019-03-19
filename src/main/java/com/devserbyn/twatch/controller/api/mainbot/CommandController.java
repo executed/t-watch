@@ -51,7 +51,7 @@ public class CommandController implements ApiController {
                 return BotAnswerUtil.wrapIntoApiMethod(response, update, true);
             }
             case "/currencySets": {
-                String response = currencyRequester.enableSettingsMode();
+                String response = currencyRequester.enableSettingsMode(update);
                 return BotAnswerUtil.wrapIntoApiMethod(response, update, true);
             }
             default: {

@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.Optional;
@@ -43,57 +44,69 @@ public class CurrencyAPIRequesterImpl implements CurrencyAPIRequester {
     @Override
     public String requestCurrencyString(Update update, Currency firstCurrency, Currency secondCurrency) {
         if (!userUtil.isRegistered(update)) {
-            return botAnswerService.lookForServiceResponse(BOT_ANSWER_SERVICE_NOT_REG, MainBot.class);
+            return botAnswerService.getNotRegisteredResponse(MainBot.class);
         }
         return currencyParser.parseCurrencyValues(firstCurrency, secondCurrency);
     }
 
     @Override
-    public String enableSettingsMode() {
+    public String enableSettingsMode(Update update) {
+        if (!userUtil.isRegistered(update)) {
+            return botAnswerService.getNotRegisteredResponse(MainBot.class);
+        }
         currencyBO.setSettingMode(true);
         applicationBO.setActiveLayerController(context.getBean(CurrencyController.class));
+
         return botAnswerService.lookForServiceResponse(BOT_ANSWER_SERVICE_CUR_SETTS_START, MainBot.class);
     }
 
     @Override
-    public String resolveCurrencySettingMode(Update update) {
+    public Optional<BotApiMethod> resolveCurrencySettingMode(Update update) {
         if (!userUtil.isRegistered(update)) {
-            return botAnswerService.lookForServiceResponse(BOT_ANSWER_SERVICE_NOT_REG, MainBot.class);
+            return botAnswerService.getNotRegisteredResponse(update, MainBot.class);
         }
-        String messageText = update.getMessage().getText();
-        String username = update.getMessage().getFrom().getUserName();
-
+        String response;
         if (!currencyBO.isFirstCurrencySet()) {
-            try {
-                Currency firstCurrency = Currency.valueOf(messageText);
-                CurrencySettings settings = new CurrencySettings();
-                settings.setFirstCurrency(firstCurrency);
-
-                currencySettingsRepositoryService.saveByUsername(settings, username);
-                currencyBO.setFirstCurrencySet(true);
-
-                return botAnswerService.lookForServiceResponse(BOT_ANSWER_SERVICE_CURRENCY_SETS_FIRST_CUR_SET_SUCCESS, MainBot.class);
-            } catch (Exception e) {
-                log.error("Smth went wrong while setting first currency", e);
-                return botAnswerService.lookForServiceResponse(BOT_ANSWER_SERVICE_CURRENCY_SETS_CUR_SET_FAIL, MainBot.class);
-            }
+            response = this.setFirstCurrency(update);
         } else {
-            try {
-                User user = userRepoService.findByUsername(username).orElseThrow(RuntimeException::new);
-                CurrencySettings settings = currencySettingsRepositoryService.findByUser(user).orElseThrow(RuntimeException::new);
+            response = this.setSecondCurrency(update);
+        }
+        return BotAnswerUtil.wrapIntoOptionalApiMethod(response, update, true);
+    }
 
-                Currency secondCurrency = Currency.valueOf(messageText);
-                settings.setSecondCurrency(secondCurrency);
+    private String setFirstCurrency(Update update) {
+        try {
+            Currency firstCurrency = Currency.valueOf(update.getMessage().getText());
+            CurrencySettings settings = new CurrencySettings();
+            settings.setFirstCurrency(firstCurrency);
 
-                currencySettingsRepositoryService.save(settings);
-                currencyBO.setSettingMode(false);
-                applicationBO.setActiveLayerController(null);
+            currencySettingsRepositoryService.saveByUsername(settings, update.getMessage().getFrom().getUserName());
+            currencyBO.setFirstCurrencySet(true);
 
-                return botAnswerService.lookForServiceResponse(BOT_ANSWER_SERVICE_CURRENCY_SETS_SECOND_CUR_SET_SUCCESS, MainBot.class);
-            } catch (Exception e) {
-                log.error("Smth went wrong while setting second currency", e);
-                return botAnswerService.lookForServiceResponse(BOT_ANSWER_SERVICE_CURRENCY_SETS_CUR_SET_FAIL, MainBot.class);
-            }
+            return botAnswerService.lookForServiceResponse(BOT_ANSWER_SERVICE_CURRENCY_SETS_FIRST_CUR_SET_SUCCESS, MainBot.class);
+        } catch (Exception e) {
+            log.error("Something went wrong while setting first currency", e);
+            return botAnswerService.lookForServiceResponse(BOT_ANSWER_SERVICE_CURRENCY_SETS_CUR_SET_FAIL, MainBot.class);
+        }
+    }
+
+    private String setSecondCurrency(Update update) {
+        try {
+            User user = userRepoService.findByUsername(update.getMessage().getFrom().getUserName())
+                                                                          .orElseThrow(RuntimeException::new);
+            CurrencySettings settings = currencySettingsRepositoryService.findByUser(user)
+                                                                         .orElseThrow(RuntimeException::new);
+            Currency secondCurrency = Currency.valueOf(update.getMessage().getText());
+            settings.setSecondCurrency(secondCurrency);
+
+            currencySettingsRepositoryService.save(settings);
+            currencyBO.setSettingMode(false);
+            applicationBO.setActiveLayerController(null);
+
+            return botAnswerService.lookForServiceResponse(BOT_ANSWER_SERVICE_CURRENCY_SETS_SECOND_CUR_SET_SUCCESS, MainBot.class);
+        } catch (Exception e) {
+            log.error("Something went wrong while setting second currency", e);
+            return botAnswerService.lookForServiceResponse(BOT_ANSWER_SERVICE_CURRENCY_SETS_CUR_SET_FAIL, MainBot.class);
         }
     }
 }

@@ -9,6 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Random;
 // TODO: Make a job that valid containment of dictionary file
 @Component
@@ -61,6 +62,14 @@ public class BotAnswerUtil {
         SendMessage sendMessage = new SendMessage(update.getMessage().getChatId(), text);
         sendMessage.enableMarkdown(md);
         return sendMessage;
+    }
+
+    public static Optional<BotApiMethod> wrapIntoOptionalApiMethod(String text, Update update) {
+        return Optional.of(wrapIntoApiMethod(text, update));
+    }
+
+    public static Optional<BotApiMethod> wrapIntoOptionalApiMethod(String text, Update update, boolean md) {
+        return Optional.of(wrapIntoApiMethod(text, update, md));
     }
 
     public static String replaceNewLineChars(String text) {
