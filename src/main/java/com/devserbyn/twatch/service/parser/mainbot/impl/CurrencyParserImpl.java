@@ -1,6 +1,6 @@
 package com.devserbyn.twatch.service.parser.mainbot.impl;
 
-import com.devserbyn.twatch.service.parser.mainbot.Currency;
+import com.devserbyn.twatch.model.mainbot.currency.Currency;
 import com.devserbyn.twatch.service.parser.mainbot.CurrencyParser;
 import com.devserbyn.twatch.utility.ParserUtil;
 import com.devserbyn.twatch.utility.WebUtil;

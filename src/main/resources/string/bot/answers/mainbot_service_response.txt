@@ -4,3 +4,7 @@ REGISTER_SUCCESS = *Success* '/n'Now you are a part of Twatch project '/n'To rem
 DEREGISTER_FAIL = *Error*'/n'Sorry, something went wrong. '/n'Perhaps you were not registered
 DEREGISTER_SUCCESS = *Success* '/n'Your data was completely removed
 NOT_REGISTERED = *Error* '/n'You haven't got access for this function '/n'Try again by registering your account with command /register
+CURRENCY_SETS_START = *Good* '/n'Here is a list of available currency names: '/n'EUR, UAH, RUB '/n'Send me correct currency name
+CURRENCY_SETS_CUR_SET_FAIL = *Error* '/n'Try again
+CURRENCY_SETS_FIRST_CUR_SET_SUCCESS = *Success* '/n'Alright, specify second name of currency
+CURRENCY_SETS_SECOND_CUR_SET_SUCCESS = *Success* '/n'Alright, everything is ready. '/n'Type /currency

@@ -2,7 +2,7 @@ package com.devserbyn.twatch.controller.api.mainbot;
 
 import com.devserbyn.twatch.service.answer.api.mainbot.CurrencyAPIRequester;
 import com.devserbyn.twatch.service.answer.api.mainbot.JokeAPIRequester;
-import com.devserbyn.twatch.service.parser.mainbot.Currency;
+import com.devserbyn.twatch.model.mainbot.currency.Currency;
 import com.devserbyn.twatch.model.bot.MainBot;
 import com.devserbyn.twatch.service.answer.BotAnswerService;
 import com.devserbyn.twatch.service.mainbot.UserService;
@@ -48,6 +48,10 @@ public class CommandController implements ApiController {
             }
             case "/currency": {
                 String response = currencyRequester.requestCurrencyString(update, Currency.USD, Currency.UAH);
+                return BotAnswerUtil.wrapIntoApiMethod(response, update, true);
+            }
+            case "/currencySets": {
+                String response = currencyRequester.enableSettingsMode();
                 return BotAnswerUtil.wrapIntoApiMethod(response, update, true);
             }
             default: {
