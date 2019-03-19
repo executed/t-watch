@@ -20,4 +20,5 @@ public final class STR_CONST {
     public static final String BOT_ANSWER_SERVICE_REGISTER_FAIL = "REGISTER_FAIL";
     public static final String BOT_ANSWER_SERVICE_DEREGISTER_FAIL = "DEREGISTER_FAIL";
     public static final String BOT_ANSWER_SERVICE_DEREGISTER_SUCCESS = "DEREGISTER_SUCCESS";
+    public static final String BOT_ANSWER_SERVICE_NOT_REG = "NOT_REGISTERED";
 }

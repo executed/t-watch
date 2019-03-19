@@ -1,5 +1,6 @@
 UNKNOWN = Sorry, something went wrong
 REGISTER_FAIL = *Error*'/n'Sorry, something went wrong. '/n'Perhaps you are already registered
-REGISTER_SUCCESS = *Success* '/n'Now you are a part of Twatch project
+REGISTER_SUCCESS = *Success* '/n'Now you are a part of Twatch project '/n'To remove your data type /removeme
 DEREGISTER_FAIL = *Error*'/n'Sorry, something went wrong. '/n'Perhaps you were not registered
 DEREGISTER_SUCCESS = *Success* '/n'Your data was completely removed
+NOT_REGISTERED = *Error* '/n'You haven't got access for this function '/n'Try again by registering your account with command /register

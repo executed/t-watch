@@ -47,8 +47,8 @@ public class CommandController implements ApiController {
                 return BotAnswerUtil.wrapIntoApiMethod(response, update, true);
             }
             case "/currency": {
-                String response = currencyRequester.requestCurrencyString(Currency.USD, Currency.UAH);
-                return BotAnswerUtil.wrapIntoApiMethod(response, update);
+                String response = currencyRequester.requestCurrencyString(update, Currency.USD, Currency.UAH);
+                return BotAnswerUtil.wrapIntoApiMethod(response, update, true);
             }
             default: {
                 return BotAnswerUtil.wrapIntoApiMethod("Command wasn't recognized", update, true);
