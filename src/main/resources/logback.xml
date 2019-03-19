@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="false">
+<configuration>
 
     <!-- Standard out to console appender -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
         <encoder>
             <charset>UTF-8</charset>
             <pattern>[%d{MM/dd/yy HH:mm:ss:S}]\(%t\) %-5p - %-26.26c{1} - %m%n</pattern>
@@ -46,14 +51,14 @@
         </encoder>
     </appender>
 
-    <logger name="com.twatch" level="DEBUG"/>
+    <logger name="com.twatch" level="INFO"/>
 
     <logger name="org.springframework" level="INFO"/>
     <logger name="org.hibernate" level="FATAL"/>
     <logger name="liquibase" level="INFO"/>
     <logger name="springfox" level="INFO"/>
 
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
         <appender-ref ref="ERROR"/>
