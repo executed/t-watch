@@ -4,11 +4,8 @@ import com.devserbyn.twatch.service.answer.api.mainbot.CurrencyAPIRequester;
 import com.devserbyn.twatch.service.answer.api.mainbot.JokeAPIRequester;
 import com.devserbyn.twatch.service.parser.mainbot.Currency;
 import com.devserbyn.twatch.model.bot.MainBot;
-import com.devserbyn.twatch.model.mainbot.User;
 import com.devserbyn.twatch.service.answer.BotAnswerService;
-import com.devserbyn.twatch.service.answer.api.JokeAPIRequester;
 import com.devserbyn.twatch.service.mainbot.UserService;
-import com.devserbyn.twatch.service.mainbot.repository.UserRepositoryService;
 import com.devserbyn.twatch.utility.BotAnswerUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -22,6 +19,7 @@ public class CommandController implements ApiController {
     private final JokeAPIRequester jokeService;
     private final CurrencyAPIRequester currencyRequester;
     private final BotAnswerService botAnswerService;
+    private final UserService userService;
 
     @Override
     public BotApiMethod handle(Update update) {
