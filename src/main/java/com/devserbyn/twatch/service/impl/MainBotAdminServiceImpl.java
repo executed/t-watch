@@ -1,5 +1,6 @@
 package com.devserbyn.twatch.service.impl;
 
+import com.devserbyn.twatch.constant.PATH_CONST;
 import com.devserbyn.twatch.model.bot.MainBot;
 import com.devserbyn.twatch.service.AdminService;
 import lombok.RequiredArgsConstructor;
@@ -11,19 +12,19 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 @Service
 @RequiredArgsConstructor
-@PropertySource ("classpath:deployment.properties")
+@PropertySource (PATH_CONST.PROPERTY_DEPLOYMENT)
 public class MainBotAdminServiceImpl implements AdminService {
 
     private final Environment env;
     private final MainBot bot;
-    private static int minutesOfRuntime = 0;
+    private int minutesOfRuntime = Integer.parseInt(env.getProperty("deployment.activityStatusMessage.timeDiff"));
 
     @Scheduled(cron = "${deployment.activityStatusMessage.cronExp}")
     public void sendMessageToAdmin() {
         SendMessage message = new SendMessage();
         message.setChatId(env.getProperty("deployment.admin.chatId"));
         message.setText("Application running minutes: " + minutesOfRuntime);
-        minutesOfRuntime += 60;
         bot.sendResponse(message);
+        minutesOfRuntime += 60;
     }
 }
