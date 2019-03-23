@@ -100,8 +100,8 @@ public class CurrencyAPIRequesterImpl implements CurrencyAPIRequester {
             settings.setSecondCurrency(secondCurrency);
 
             currencySettingsRepositoryService.save(settings);
-            currencyBO.setSettingMode(false);
-            applicationBO.setActiveLayerController(null);
+            currencyBO.disableSettingsMode();
+            applicationBO.disableActiveLayerController();
 
             return botAnswerService.lookForServiceResponse(BOT_ANSWER_SERVICE_CURRENCY_SETS_SECOND_CUR_SET_SUCCESS, MainBot.class);
         } catch (Exception e) {

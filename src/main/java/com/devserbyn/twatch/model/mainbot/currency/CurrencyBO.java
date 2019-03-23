@@ -11,4 +11,9 @@ public class CurrencyBO {
 
     private boolean settingMode;
     private boolean firstCurrencySet;
+
+    public void disableSettingsMode() {
+        this.settingMode = false;
+        this.firstCurrencySet = false;
+    }
 }

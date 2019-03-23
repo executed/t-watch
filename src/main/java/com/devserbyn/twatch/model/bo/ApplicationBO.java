@@ -19,4 +19,8 @@ public class ApplicationBO {
     private boolean developmentMode = false;
     private Map<BaseBot, BotSession> registeredBots = new HashMap<>();
     private LayerController activeLayerController;
+
+    public void disableActiveLayerController() {
+        this.activeLayerController = null;
+    }
 }
